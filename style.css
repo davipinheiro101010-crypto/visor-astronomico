@@ -150,3 +150,87 @@ video {
 video {
   transform: rotate(180deg);
 }
+/* === ÁREA DE GRAVAÇÕES — MELHORADA PARA CELULAR === */
+
+/* Botão grande e fácil de tocar */
+.botao-gravacoes {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1a237e;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  font-size: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  min-width: 120px;
+  min-height: 50px;
+}
+
+.botao-gravacoes:active {
+  background: #4fc3f7;
+  transform: scale(0.95);
+}
+
+/* Caixa das gravações — tela cheia no celular */
+.caixa-gravacoes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 15, 40, 0.95);
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho fixo */
+.cabecalho-gravacoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #4fc3f7;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: rgba(10, 15, 40, 0.98);
+  padding: 15px 20px;
+  margin: -20px -20px 20px -20px;
+}
+
+.fechar-gravacoes {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  min-width: 80px;
+  min-height: 44px;
+}
+
+/* Itens da lista — grandes no celular */
+.item-gravacao {
+  background: #1a237e;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+/* Esconde a barra pequena antiga */
+.lista-gravacoes {
+  display: none;
+}
+
+/* Câmera — mantém virada certa */
+video {
+  transform: rotate(180deg);
+  width: 100%;
+  height: auto;
+}
