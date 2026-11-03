@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câmera de Ver Coisas Astronômicas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Tela da Câmera -->
+  <div class="camera-container">
+    <video id="camera" autoplay playsinline></video>
+    
+    <!-- Sobreposição de status da IA -->
+    <div id="status-ia" class="status-ia">
+      <span id="texto-status">Aguardando céu...</span>
+    </div>
+
+    <!-- Botão de ajuda flutuante -->
+    <button id="botao-ajuda" class="botao-ajuda">?</button>
+    
+    <!-- Painel de gravações salvas -->
+    <div class="painel-gravacoes">
+      <h3>📹 Gravações Salvas</h3>
+      <div id="lista-gravacoes">
+        <p class="vazio">Nenhuma gravação ainda</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caixa de informações -->
+  <div id="caixa-ajuda" class="caixa-ajuda escondida">
+    <button id="fechar-ajuda" class="fechar">&times;</button>
+    <h4>ℹ️ Como usar</h4>
+    <p>👉 Deixe seu celular virado para o céu</p>
+    <p>📷 A câmera está sempre atenta</p>
+    <p>🎬 Quando algo for detectado, a gravação começa automaticamente</p>
+    <p>💬 Veja o painel embaixo para acessar tudo que foi salvo</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
