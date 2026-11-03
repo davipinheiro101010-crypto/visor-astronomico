@@ -147,9 +147,6 @@ video {
 video {
   transform: scaleX(-1);
 }
-video {
-  transform: rotate(180deg);
-}
 /* === ÁREA DE GRAVAÇÕES — MELHORADA PARA CELULAR === */
 
 /* Botão grande e fácil de tocar */
