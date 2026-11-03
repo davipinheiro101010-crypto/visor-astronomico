@@ -154,3 +154,98 @@ function atualizarListaGravacoes() {
     `).join('');
   }
 }
+// === GRAVAÇÃO AUTOMÁTICA + SALVAR + APAGAR ===
+let mediaRecorder = null;
+let dadosGravacaoAtual = [];
+let dadosGravacao = [];
+let gravacaoAtiva = false;
+
+// GRAVA AUTOMATICAMENTE quando detecta algo
+function iniciarGravacao() {
+  if (gravacaoAtiva || !video.srcObject) return;
+
+  const stream = video.srcObject;
+  mediaRecorder = new MediaRecorder(stream);
+  dadosGravacaoAtual = [];
+
+  mediaRecorder.ondataavailable = (e) => {
+    if (e.data.size > 0) dadosGravacaoAtual.push(e.data);
+  };
+
+  mediaRecorder.onstop = () => {
+    salvarGravacao();
+  };
+
+  mediaRecorder.start();
+  gravacaoAtiva = true;
+  atualizarStatus('🔴 Gravando automaticamente...', true);
+}
+
+// PARAR gravação
+function pararGravacao() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+    gravacaoAtiva = false;
+    atualizarStatus('✅ Gravação salva!', false);
+  }
+}
+
+// SALVAR na lista
+function salvarGravacao() {
+  const blob = new Blob(dadosGravacaoAtual, { type: 'video/webm' });
+  const url = URL.createObjectURL(blob);
+  
+  dadosGravacao.push({
+    id: Date.now(),
+    url: url,
+    data: new Date().toLocaleString('pt-BR'),
+    nome: `Gravação ${dadosGravacao.length + 1}`
+  });
+
+  atualizarListaGravacoes();
+}
+
+// APAGAR gravação
+function apagarGravacao(id) {
+  if (confirm('Tem certeza que quer apagar esta gravação?')) {
+    dadosGravacao = dadosGravacao.filter(g => g.id !== id);
+    atualizarListaGravacoes();
+  }
+}
+
+// Atualizar lista com Baixar e Apagar
+function atualizarListaGravacoes() {
+  const conteudo = document.getElementById('lista-gravacoes-conteudo');
+  if (!conteudo) return;
+
+  if (dadosGravacao.length === 0) {
+    conteudo.innerHTML = `<p style="color: #aaa; text-align: center; padding: 30px;">Nenhuma gravação ainda.<br>O sistema grava sozinho quando detecta algo!</p>`;
+  } else {
+    conteudo.innerHTML = dadosGravacao.map((g) => `
+      <div style="background:#1a237e; margin:10px; padding:15px; border-radius:10px;">
+        <strong>📼 ${g.nome}</strong><br>
+        <span style="color:#aaa; font-size:14px;">${g.data}</span>
+        <div style="margin-top:10px;">
+          <a href="${g.url}" download="gravacao-${g.id}.webm" style="color:#4fc3f7; margin-right:15px; text-decoration:none;">📥 Baixar</a>
+          <button onclick="apagarGravacao(${g.id})" style="background:transparent; color:#ff6b6b; border:none; cursor:pointer; font-size:16px;">🗑️ Apagar</button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// CONTROLE DA ABA
+const botaoGrav = document.getElementById('botao-gravacoes');
+const caixaGrav = document.getElementById('caixa-gravacoes');
+const fecharGrav = document.getElementById('fechar-gravacoes');
+
+if (botaoGrav && caixaGrav && fecharGrav) {
+  botaoGrav.addEventListener('click', () => {
+    caixaGrav.classList.remove('escondida');
+    atualizarListaGravacoes();
+  });
+
+  fecharGrav.addEventListener('click', () => {
+    caixaGrav.classList.add('escondida');
+  });
+}
