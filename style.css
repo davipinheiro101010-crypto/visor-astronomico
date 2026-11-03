@@ -148,5 +148,5 @@ video {
   transform: scaleX(-1);
 }
 video {
-  transform: rotate(180deg);
+  transform: rotate(270deg);
 }
