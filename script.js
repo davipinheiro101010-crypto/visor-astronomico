@@ -22,7 +22,7 @@ async function ligarCamera() {
         width: { ideal: 1280 },
         height: { ideal: 720 }
       },
-      audio: true
+      audio: false
     });
     video.srcObject = stream;
     console.log('Câmera traseira ligada ✅');
