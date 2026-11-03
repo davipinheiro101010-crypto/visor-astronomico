@@ -227,7 +227,7 @@ video {
 
 /* Câmera — mantém virada certa */
 video {
-  transform: rotate(180deg);
+  transform: rotate(360deg);
   width: 100%;
   height: auto;
 }
