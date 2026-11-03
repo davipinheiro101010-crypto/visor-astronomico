@@ -122,3 +122,35 @@ fecharAjuda.addEventListener('click', () => {
 
 // ================== INICIAR TUDO ==================
 document.addEventListener('DOMContentLoaded', ligarCamera);
+// === CONTROLE DA ABA DE GRAVAÇÕES ===
+const botaoGravacoes = document.getElementById('botao-gravacoes');
+const caixaGravacoes = document.getElementById('caixa-gravacoes');
+const fecharGravacoes = document.getElementById('fechar-gravacoes');
+
+// ABRIR aba
+botaoGravacoes.addEventListener('click', () => {
+  caixaGravacoes.classList.remove('escondida');
+  atualizarListaGravacoes();
+});
+
+// FECHAR aba
+fecharGravacoes.addEventListener('click', () => {
+  caixaGravacoes.classList.add('escondida');
+});
+
+// Atualizar lista
+function atualizarListaGravacoes() {
+  const conteudo = document.getElementById('lista-gravacoes-conteudo');
+  if (!conteudo) return;
+  
+  if (dadosGravacao.length === 0) {
+    conteudo.innerHTML = `<p style="color: #aaa; text-align: center; padding: 20px;">Nenhuma gravação ainda. Comece a gravar!</p>`;
+  } else {
+    conteudo.innerHTML = dadosGravacao.map((g, i) => `
+      <div class="item-gravacao">
+        <strong>Gravação ${i+1}</strong><br>
+        ${g.data || 'Data não registrada'}
+      </div>
+    `).join('');
+  }
+}
