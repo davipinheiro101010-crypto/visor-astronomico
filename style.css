@@ -144,3 +144,9 @@ video {
   text-align: center;
   padding: 10px;
 }
+video {
+  transform: scaleX(-1);
+}
+video {
+  transform: rotate(180deg);
+}
